@@ -34,6 +34,7 @@ class ActivityDetail : AppCompatActivity() {
         initializeCoponents()
         initializeListeners()
         initializeData()
+
     }
 
     fun manageintent(){
@@ -50,6 +51,7 @@ class ActivityDetail : AppCompatActivity() {
         n_pokemon = this.findViewById(R.id.name_pokemon);
         num_pokemon.text = id;
         url = "https://pokeapi.co/api/v2/pokemon/"+id+"/";
+        Toast.makeText(this@ActivityDetail,  url, Toast.LENGTH_LONG).show()
     }
 
     fun initializeListeners(){
@@ -72,7 +74,7 @@ class ActivityDetail : AppCompatActivity() {
 
     fun cargarinformacion(){
 
-        var item: JsonObject = data.get(0).asJsonObject
+        var item: JsonObject = data.get(1).asJsonObject
         Toast.makeText(this@ActivityDetail,  "hola", Toast.LENGTH_LONG).show()
         n_pokemon.text = item.get("name").asString
 

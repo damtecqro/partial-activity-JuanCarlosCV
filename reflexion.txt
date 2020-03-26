@@ -1,0 +1,10 @@
+File in TXT format that includes Name, Student Id, and answer 
+to the following questions: 
+Juan Carlos Cabrera Vega
+
+What made it easier for you to implement the view? 
+
+The implementation of the view was easy from the intention of the library, it is much simpler and faster
+What made it difficult for you to implement the view?
+
+It was difficult to find in which part the onclicklistener should work, due to the combination of kotlin and android. But in the end it is simpler
