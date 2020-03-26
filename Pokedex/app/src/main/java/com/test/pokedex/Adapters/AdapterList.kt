@@ -39,7 +39,7 @@ class AdapterList( ):RecyclerView.Adapter<AdapterList.ViewHolder>() {
 
     override fun onBindViewHolder(holder: AdapterList.ViewHolder, position: Int) {
         var item:JsonObject = data.get(position).asJsonObject
-
+        var x:Int = 0
         holder.bind(item,context)
         holder.itemView.setOnClickListener {
             intent = Intent(context, ActivityDetail::class.java)
@@ -47,7 +47,8 @@ class AdapterList( ):RecyclerView.Adapter<AdapterList.ViewHolder>() {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                     or Intent.FLAG_ACTIVITY_NEW_TASK
                     or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-           // intent.putExtra("ID",item.get("id").asString)
+            x = position
+           intent.putExtra("ID",(x.inc()).toString())
             context.startActivity(intent)
         }
     }
@@ -56,10 +57,7 @@ class AdapterList( ):RecyclerView.Adapter<AdapterList.ViewHolder>() {
     class ViewHolder(view: View):RecyclerView.ViewHolder(view),View.OnClickListener {
         private var imagePokemon: ImageView = view.findViewById(R.id.pokemon_image)
         private var namePokemon:TextView  = view.findViewById(R.id.pokemon_name)
-        internal lateinit var pokemon:PokemonCallback
-        fun setPokemonCallback(pokemonCallback: PokemonCallback){
-            this.pokemon = pokemonCallback
-        }
+
 
 
         fun bind(item:JsonObject,context:Context){
@@ -93,9 +91,7 @@ class AdapterList( ):RecyclerView.Adapter<AdapterList.ViewHolder>() {
         }
 
         override fun onClick(v: View?) {
-            imagePokemon.setOnClickListener {
-                pokemon.onPokemonClick()
-            }
+
            // pokemon.onPokemonClick()
             TODO("Not yet implemented")
         }

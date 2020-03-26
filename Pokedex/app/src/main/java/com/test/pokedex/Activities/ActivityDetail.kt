@@ -1,9 +1,10 @@
 package com.test.pokedex.Activities
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.JsonArray
 import com.koushikdutta.ion.Ion
@@ -16,18 +17,33 @@ class ActivityDetail : AppCompatActivity() {
     private lateinit var data: JsonArray
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: AdapterList
+
+    private lateinit var num_pokemon: TextView
+    private lateinit var id:String
+    private lateinit var url:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-
+        manageintent()
         initializeCoponents()
         initializeListeners()
-      //  initializeData()
+        initializeData()
+    }
+
+    fun manageintent(){
+
+
+        if (intent != null) {
+            id = intent.getStringExtra("ID")
+
+        }
     }
 
     fun initializeCoponents(){
-
+        num_pokemon = this.findViewById(R.id.id_pokemon);
+        num_pokemon.text = id;
+        url = "https://pokeapi.co/api/v2/pokemon/"+id+"";
     }
 
     fun initializeListeners(){
@@ -35,7 +51,7 @@ class ActivityDetail : AppCompatActivity() {
 
     fun initializeData(){
         Ion.with(context)
-            .load("https://pokeapi.co/api/v2/pokemon/?offset=0&limit=964")
+            .load(url)
             .asJsonObject()
             .done { e, result ->
                 if(e == null){
@@ -43,7 +59,7 @@ class ActivityDetail : AppCompatActivity() {
 
                     data = result.getAsJsonArray("results")
 
-                    
+
                 }
             }
     }
