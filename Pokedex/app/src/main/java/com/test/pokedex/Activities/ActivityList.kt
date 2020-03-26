@@ -26,7 +26,7 @@ class ActivityList : AppCompatActivity() {
     private lateinit var data:JsonArray
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter:AdapterList
-    private lateinit var pokemonimagen:ImageView
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +45,7 @@ class ActivityList : AppCompatActivity() {
     }
 
     fun initializeCoponents(){
-      //  pokemonimagen = findViewById<ImageView>(R.id.pokemon_image)
+
     }
 
     fun initializeListeners(){

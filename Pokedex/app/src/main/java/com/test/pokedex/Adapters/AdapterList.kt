@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.koushikdutta.ion.Ion
-import com.test.pokedex.Activities.ActivityDetalles
+import com.test.pokedex.Activities.ActivityDetail
 import com.test.pokedex.R
 
 class AdapterList( ):RecyclerView.Adapter<AdapterList.ViewHolder>() {
@@ -27,7 +27,6 @@ class AdapterList( ):RecyclerView.Adapter<AdapterList.ViewHolder>() {
         this.data = data
 
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterList.ViewHolder {
         var layoutInflater = LayoutInflater.from(parent.context)
@@ -43,12 +42,12 @@ class AdapterList( ):RecyclerView.Adapter<AdapterList.ViewHolder>() {
 
         holder.bind(item,context)
         holder.itemView.setOnClickListener {
-            intent = Intent(context, ActivityDetalles::class.java)
+            intent = Intent(context, ActivityDetail::class.java)
 
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
                     or Intent.FLAG_ACTIVITY_NEW_TASK
                     or Intent.FLAG_ACTIVITY_SINGLE_TOP)
-            intent.putExtra("ID",item.get("name").asString)
+           // intent.putExtra("ID",item.get("id").asString)
             context.startActivity(intent)
         }
     }
