@@ -14,7 +14,8 @@
         android:layout_centerInParent="true"
         android:background="@color/black_transparent"
         android:layout_margin="16dp"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        android:id="@+id/vistadetallada">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
