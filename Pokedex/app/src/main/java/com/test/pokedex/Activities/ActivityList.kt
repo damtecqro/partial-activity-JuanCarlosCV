@@ -1,18 +1,23 @@
 package com.test.pokedex.Activities
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import com.google.android.material.snackbar.Snackbar
+import android.view.View
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.JsonArray
 import com.koushikdutta.ion.Ion
 import com.test.pokedex.Adapters.AdapterList
 import com.test.pokedex.R
-
 import kotlinx.android.synthetic.main.activity_list.*
+import kotlinx.android.synthetic.main.item_list.*
 
 class ActivityList : AppCompatActivity() {
 
@@ -21,6 +26,7 @@ class ActivityList : AppCompatActivity() {
     private lateinit var data:JsonArray
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter:AdapterList
+    private lateinit var pokemonimagen:ImageView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +38,6 @@ class ActivityList : AppCompatActivity() {
         initializeListeners()
         initializeData()
 
-
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
@@ -40,11 +45,10 @@ class ActivityList : AppCompatActivity() {
     }
 
     fun initializeCoponents(){
-
+      //  pokemonimagen = findViewById<ImageView>(R.id.pokemon_image)
     }
 
     fun initializeListeners(){
-
     }
 
     fun initializeData(){
@@ -67,7 +71,6 @@ class ActivityList : AppCompatActivity() {
         linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
         linearLayoutManager.scrollToPosition(0)
 
-
         adapter = AdapterList()
         adapter.AdapterList(context,data)
 
@@ -78,4 +81,8 @@ class ActivityList : AppCompatActivity() {
 
     }
 
+
+
 }
+
+

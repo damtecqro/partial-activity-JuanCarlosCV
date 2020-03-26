@@ -1,7 +1,7 @@
 package com.test.pokedex.Adapters
 
 import android.content.Context
-import android.util.Log
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,17 +13,21 @@ import com.bumptech.glide.Glide
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.koushikdutta.ion.Ion
+import com.test.pokedex.Activities.ActivityDetalles
 import com.test.pokedex.R
 
-class AdapterList:RecyclerView.Adapter<AdapterList.ViewHolder>() {
+class AdapterList( ):RecyclerView.Adapter<AdapterList.ViewHolder>() {
 
     private lateinit var data:JsonArray
     private lateinit var context: Context
+    private lateinit var intent: Intent
 
     fun AdapterList(context:Context,data:JsonArray){
         this.context = context
         this.data = data
+
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdapterList.ViewHolder {
         var layoutInflater = LayoutInflater.from(parent.context)
@@ -38,13 +42,29 @@ class AdapterList:RecyclerView.Adapter<AdapterList.ViewHolder>() {
         var item:JsonObject = data.get(position).asJsonObject
 
         holder.bind(item,context)
+        holder.itemView.setOnClickListener {
+            intent = Intent(context, ActivityDetalles::class.java)
+
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    or Intent.FLAG_ACTIVITY_NEW_TASK
+                    or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            intent.putExtra("ID",item.get("name").asString)
+            context.startActivity(intent)
+        }
     }
 
-    class ViewHolder(view: View):RecyclerView.ViewHolder(view){
+
+    class ViewHolder(view: View):RecyclerView.ViewHolder(view),View.OnClickListener {
         private var imagePokemon: ImageView = view.findViewById(R.id.pokemon_image)
         private var namePokemon:TextView  = view.findViewById(R.id.pokemon_name)
+        internal lateinit var pokemon:PokemonCallback
+        fun setPokemonCallback(pokemonCallback: PokemonCallback){
+            this.pokemon = pokemonCallback
+        }
+
 
         fun bind(item:JsonObject,context:Context){
+
           namePokemon.setText(item.get("name").asString)
 
             Ion.with(context)
@@ -69,7 +89,20 @@ class AdapterList:RecyclerView.Adapter<AdapterList.ViewHolder>() {
                         }
                     }
                 }
+
+           // imagePokemon.setOnClickListener(this)
         }
+
+        override fun onClick(v: View?) {
+            imagePokemon.setOnClickListener {
+                pokemon.onPokemonClick()
+            }
+           // pokemon.onPokemonClick()
+            TODO("Not yet implemented")
+        }
+
 
     }
 }
+
+
